@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+import re
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -115,13 +116,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+        args = args.split()
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        new_instance = HBNBCommand.classes[args[0]]()
+        self.add_args(new_instance, args[1:])
         storage.save()
         print(new_instance.id)
         storage.save()
@@ -320,5 +323,17 @@ class HBNBCommand(cmd.Cmd):
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
 
+    @staticmethod
+    def add_args(obj, args):
+        """Check args and add them to the new instance"""
+        for arg in args:
+            arg = arg.split('=')
+            if len(arg) != 2:
+                continue
+            key, value = arg
+            value = re.findall('^("([^ ]*)"|-?[0-9]+([.][0-9]+)?)$', value)
+            if value:
+                value = eval(value[0][0].replace("_", " "))
+                setattr(obj, key, value)
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
