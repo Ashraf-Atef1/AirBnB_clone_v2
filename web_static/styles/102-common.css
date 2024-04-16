@@ -1,22 +1,29 @@
-/*
- * === Global style ===
- */
-
-/* Global style */
-body{
-    color: #484848;
-    font: 14px Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
-html, body {
-   width: 100%;
-   overflow-x: hidden;
+:root {
+	color: #484848;
+	font-size: 14px;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	--main-color: #FF5A5F;
+	--border-color: #DDDDDD;
 }
-.container{
-   margin: 30px auto;
-   max-width: 1000px;
+body {
+	padding-bottom: 30px;
+	min-height: 100vh;
+	position: relative;
 }
-
-/*strong*/
-strong {
-  font-weight: bold;
+ul {
+	list-style: none;
+}
+button {
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+.container {
+	max-width: 1000px;
+	margin: 100px auto 30px;
 }

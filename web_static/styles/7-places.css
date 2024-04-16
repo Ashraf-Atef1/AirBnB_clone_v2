@@ -1,25 +1,24 @@
-/*
- * === Places class style ===
- */
-
-/* Places style */
-.places article {
+.container .places {
+	padding: 20px;
+}
+.container .places h1 {
+	font-size: 30px;
+}
+.container .places ul {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.container .places ul article {
+	border: solid 1px #FF5A5F;
 	width: 390px;
 	padding: 20px;
 	margin: 20px;
-	border: 1px solid #ff5a5f;
-	border-radius: 4px;
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
-
-.places h1 {
+.container .places ul article h2 {
 	font-size: 30px;
-	font-weight: bold;
-	width: 100%;
-	margin: .67em 0 .67em 0;
-}	
-.places h2 {
-	font-size: 30px ;
-	font-weight: bold;
-	text-align: center;
 }
