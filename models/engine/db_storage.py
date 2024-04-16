@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Defines the DBStorage engine."""
+
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.amenity import Amenity
@@ -16,8 +17,8 @@ class DBStorage:
     """Represents a database storage engine.
 
     Attributes:
-        __engine (sqlalchemy.Engine): The working SQLAlchemy engine.
-        __session (sqlalchemy.Session): The working SQLAlchemy session.
+        __engine (sqlalchemy.Engine): The SQLAlchemy engine.
+        __session (sqlalchemy.Session): The SQLAlchemy session.
     """
 
     __engine = None
@@ -35,28 +36,29 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """Query on the curret database session all objects of the given class.
+        """Query all objects in the current database session.
 
-        If cls is None, queries all types of objects.
+        Args:
+            cls (class, optional): The class to query objects for.
 
-        Return:
-            Dict of queried classes in the format <class name>.<obj id> = obj.
+        Returns:
+            dict: A dictionary of queried objects.
         """
         if cls is None:
-            objs = self.__session.query(State).all()
-            objs.extend(self.__session.query(City).all())
-            objs.extend(self.__session.query(User).all())
-            objs.extend(self.__session.query(Place).all())
-            objs.extend(self.__session.query(Review).all())
-            objs.extend(self.__session.query(Amenity).all())
+            classes = [State, City, User, Place, Review, Amenity]
+            objs = []
+            for cls in classes:
+                objs.extend(self.__session.query(cls).all())
         else:
-            if isinstance(cls, str):
-                cls = eval(cls)
-            objs = self.__session.query(cls)
+            objs = self.__session.query(cls).all()
         return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
-        """Add obj to the current database session."""
+        """Add a new object to the current database session.
+
+        Args:
+            obj (BaseModel): The object to add.
+        """
         self.__session.add(obj)
 
     def save(self):
@@ -64,8 +66,12 @@ class DBStorage:
         self.__session.commit()
 
     def delete(self, obj=None):
-        """Delete obj from the current database session."""
-        if obj is not None:
+        """Delete an object from the current database session.
+
+        Args:
+            obj (BaseModel, optional): The object to delete.
+        """
+        if obj:
             self.__session.delete(obj)
 
     def reload(self):
@@ -77,5 +83,5 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        """Close the working SQLAlchemy session."""
+        """Close the current database session."""
         self.__session.close()

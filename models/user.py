@@ -1,25 +1,34 @@
 #!/usr/bin/python3
 """Defines the User class."""
+
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
-    """Represents a user for a MySQL database.
+    """Represents a user in a lodging system.
 
-    Inherits from SQLAlchemy Base and links to the MySQL table users.
+    Inherits from BaseModel and links to the MySQL table 'users'.
+    It stores information about users, including their personal details,
+    places they own, and reviews they've written.
 
     Attributes:
         __tablename__ (str): The name of the MySQL table to store users.
-        email: (sqlalchemy String): The user's email address.
-        password (sqlalchemy String): The user's password.
-        first_name (sqlalchemy String): The user's first name.
-        last_name (sqlalchemy String): The user's last name.
-        places (sqlalchemy relationship): The User-Place relationship.
-        reviews (sqlalchemy relationship): The User-Review relationship.
+        email (sqlalchemy String): The email address of the user.
+        password (sqlalchemy String): The password of the user.
+        first_name (sqlalchemy String): The first name of the user.
+        last_name (sqlalchemy String): The last name of the user.
+        places (sqlalchemy relationship):
+        Relationship with Place class to represent
+            the places owned by the user.
+        reviews (sqlalchemy relationship):
+        Relationship with Review class to represent
+            the reviews written by the user.
     """
+
     __tablename__ = "users"
+
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     first_name = Column(String(128))
