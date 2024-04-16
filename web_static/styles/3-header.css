@@ -2,15 +2,17 @@ header {
 	background-color: white;
 	height: 70px;
 	width: 100%;
-	border-bottom: solid 1px #CCCCCC;
-	display: flex;
-	justify-content: left;
-	align-items: center;
+	
+	border-bottom: 1px solid #CCCCCC;
 }
-header .logo {
+
+#header_logo {
+	height: 100%;
+	width: 142px;
+
+	background-image: url("../images/logo.png");
+	background-repeat: no-repeat;
+	background-position: center;
+
 	margin-left: 20px;
-	width: 150px;
-	height: 70px;
-	background: url(../images/logo.png) left center no-repeat;
-	background-size: contain;
 }
