@@ -1,8 +1,1 @@
-{
-    "State.19e4bace-a236-4250-b2b9-bcc583a9d9c7": {
-        "created_at": "2024-04-18T08:04:31.769288",
-        "updated_at": "2024-04-18T10:04:31.769315",
-        "id": "19e4bace-a236-4250-b2b9-bcc583a9d9c7",
-        "__class__": "State"
-    }
-}
+{"State.101979ed-9ed6-4acc-9d8b-ba2ef1057d20": {"created_at": "2024-04-18T08:11:49.140279", "updated_at": "2024-04-18T10:11:49.140323", "id": "101979ed-9ed6-4acc-9d8b-ba2ef1057d20", "name": "California", "__class__": "State"}, "City.7508e76f-441d-4530-abc2-82b2f2becab0": {"created_at": "2024-04-18T08:11:49.140464", "updated_at": "2024-04-18T10:11:49.140498", "id": "7508e76f-441d-4530-abc2-82b2f2becab0", "state_id": "101979ed-9ed6-4acc-9d8b-ba2ef1057d20", "name": "San Francisco is super cool", "__class__": "City"}}
