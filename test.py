@@ -1,8 +1,19 @@
-create State name="California"
-create State name="Arizona"
-all State
+#!/usr/bin/python3
 
-create Place city_id="0001" user_id="0001" name="My_little_house" number_rooms=4 number_bathrooms=2 max_guest=10 price_by_night=300 latitude=37.773972 longitude=-122.431297
-all Place
+from models.state import State
+from models.city import City
+from models import storage
+
+
+new_state = State(name="California")
+storage.new(new_state)
+
+# new_cities = []
+# new_city1 = City(name="San Francisco")
+# new_cities.append(new_city1)
+# new_city2 = City(name="Los Angeles")
+# new_cities.append(new_city2)
+
+storage.save()
 
 

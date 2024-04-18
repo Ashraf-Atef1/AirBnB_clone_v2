@@ -1,1 +1,17 @@
-{"State.54afa2c8-bb59-40a0-9999-d6e1d768aca4": {"id": "54afa2c8-bb59-40a0-9999-d6e1d768aca4", "created_at": "2024-04-18T08:37:31.653032", "updated_at": "2024-04-18T08:37:31.653042", "name": "California", "__class__": "State"}, "City.44d0a1f6-aeaf-4305-a290-a993dfc76e95": {"id": "44d0a1f6-aeaf-4305-a290-a993dfc76e95", "created_at": "2024-04-18T08:37:31.653228", "updated_at": "2024-04-18T08:37:31.653236", "state_id": "54afa2c8-bb59-40a0-9999-d6e1d768aca4", "name": "Fremont", "__class__": "City"}}
+{
+    "State.72381891-a72f-445c-bbd7-e0df3dc8312b": {
+        "created_at": "2024-04-17T17:10:32.876967",
+        "updated_at": "2024-04-17T17:10:32.876979",
+        "id": "72381891-a72f-445c-bbd7-e0df3dc8312b",
+        "name": "cali",
+        "__class__": "State"
+    },
+    "State.1080cfab-d06d-4635-885b-87d4f2a34fa2": {
+        "created_at": "2024-04-17T17:10:32.878688",
+        "updated_at": "2024-04-17T19:10:32.878807",
+        "id": "1080cfab-d06d-4635-885b-87d4f2a34fa2",
+        "name": "California",
+        "__class__": "State"
+    }
+}
+
