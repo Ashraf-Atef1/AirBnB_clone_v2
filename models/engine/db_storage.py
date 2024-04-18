@@ -6,7 +6,6 @@
 
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine, MetaData, select
-from dotenv import load_dotenv
 from os import getenv
 from sqlalchemy.sql import text
 from models.base_model import BaseModel
@@ -17,7 +16,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
-load_dotenv()
 
 
 class DBStorage:
