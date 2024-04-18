@@ -12,36 +12,15 @@ class FileStorage:
     @classmethod
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.place import Place
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.review import Review
-
-        classes = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "Place": Place,
-            "State": State,
-            "City": City,
-            "Amenity": Amenity,
-            "Review": Review,
-        }
-        required_objs = {}
-        if cls:
-            if cls not in classes.keys():
-                return required_objs
-            for key, value in FileStorage.all().items():
-                if key.split(".")[0] == cls:
-                    # print(key.split('.')[0])
-                    required_objs.append(value)
-                    # print(value)
-                # print (required_objs)
-            return required_objs
-        else:
-            return FileStorage.__objects
+        if cls is not None:
+            if isinstance(cls, str):
+                cls = eval(cls)
+            cls_dict = {}
+            for key, obj in self.__objects.items():
+                if isinstance(obj, cls):
+                    cls_dict[key] = obj
+            return cls_dict
+        return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
