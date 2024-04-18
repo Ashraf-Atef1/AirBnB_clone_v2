@@ -1,1 +1,1 @@
-# AirBnB_clone_test Web-static
+This directory implements webpage design.

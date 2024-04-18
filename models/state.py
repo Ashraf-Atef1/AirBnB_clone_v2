@@ -1,39 +1,32 @@
 #!/usr/bin/python3
-"""Defines the State class."""
-
-import models
-from os import getenv
+""" State Module for HBNB project """
 from models.base_model import BaseModel, Base
-from models.city import City
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
+from dotenv import load_dotenv
+from os import getenv
 
-class State(BaseModel, Base):
-    """Represents a state in a geographic location system.
+load_dotenv()
 
-    Inherits from BaseModel and links to the MySQL table 'states'.
-    It stores information about states and their associated cities.
 
-    Attributes:
-        __tablename__ (str): The name of the MySQL table to store states.
-        name (sqlalchemy String): The name of the state.
-        cities (sqlalchemy relationship):
-        Relationship with City class to represent
-            the cities within the state.
-    """
-
-    __tablename__ = "states"
-
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="state", cascade="delete")
-
-    if getenv("HBNB_TYPE_STORAGE") != "db":
+if getenv("HBNB_TYPE_STORAGE") == "db":
+    class State(BaseModel, Base):
+        """ State class"""
+        __tablename__ = "states"
         @property
         def cities(self):
-            """Get a list of all related City objects."""
-            city_list = []
-            for city in list(models.storage.all(City).values()):
-                if city.state_id == self.id:
-                    city_list.append(city)
-            return city_list
+            """ getter attribute cities that returns the list of City instances
+            with state_id equals to the current State.id => It will be the FileStorage
+            relationship between State and City """
+            from models.city import City
+            return [city for city in City.query().all() if city.state_id == self.id]
+
+        name = Column(String(128), nullable=False)
+        
+        cities = relationship("City", back_populates="state", cascade="all, delete-orphan")
+else:
+    class State(BaseModel):
+        """ State class """
+        name = ""
+        

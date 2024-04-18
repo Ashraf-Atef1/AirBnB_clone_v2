@@ -1,33 +1,32 @@
 #!/usr/bin/python3
-"""Defines the City class."""
-
-from models.base_model import BaseModel, Base
+""" City Module for HBNB project """
+from models.base_model import BaseModel, Base, getenv ,load_dotenv
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
+from models.state import State
 
+load_dotenv()
 
-class City(BaseModel, Base):
-    """Represents a city in a geographic location system.
+if getenv("HBNB_TYPE_STORAGE")=="db":
+    class City(BaseModel, Base):
+        """The city class, contains state ID and name"""
 
-    This class inherits from BaseModel and links to the MySQL table 'cities'.
-    It stores information about cities and their corresponding states.
+        __tablename__ = "cities"
+        name = Column(String(128), nullable=False)
+        state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
 
-    Attributes:
-        __tablename__ (str): The name of the MySQL table to store cities.
-        name (sqlalchemy String): The name of the city.
-        state_id (sqlalchemy String): The ID of the state the city belongs to.
-        places (sqlalchemy relationship):
-        Relationship with Place class to establish
-        one-to-many association between cities and places.
-    """
+        # places = relationship(
+        #     "Place",
+        #     backref="city",
+        #     cascade="delete",
+        #     passive_deletes=True
+        # )
 
-    __tablename__ = "cities"
-
-    name = Column(String(128), nullable=False)
-    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
-    places = relationship(
-        "Place",
-        backref="city",
-        cascade="delete",
-        passive_deletes=True
-    )
+        places = relationship(
+            "Place", back_populates="cities", cascade="all, delete-orphan"
+        )
+        state = relationship("State", back_populates="cities")
+else:
+    class City(BaseModel):
+        name = ""
+        state_id = ""
