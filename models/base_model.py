@@ -3,12 +3,9 @@
 import uuid
 from datetime import datetime
 from sqlalchemy.orm import declarative_base
-from dotenv import load_dotenv
 from os import getenv
 from sqlalchemy import Column, String, DateTime, Integer
 
-
-load_dotenv()
 
 
 Base = declarative_base()
