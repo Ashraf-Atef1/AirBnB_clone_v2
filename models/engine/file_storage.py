@@ -68,11 +68,11 @@ class FileStorage:
         # print("priting what's isnnide objetcts" + str(self.all()))
 
     def delete(self, obj=None):
-        """delete obj from __objects if its inside - if
-        obj is equal to None, the method should not do anything"""
-        if obj == None:
-            return
-        for key in self.all().keys():
-            if key.split(".")[1] == obj.id:
-                del self.all()[key]
-                break
+        """Delete an object from the storage dictionary.
+
+        Args:
+            obj (BaseModel, optional): The object to delete.
+        """
+        if obj is not None:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            self.__objects.pop(key, None)
