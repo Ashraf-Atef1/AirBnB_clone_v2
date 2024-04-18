@@ -9,8 +9,7 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    @classmethod
-def all(self, cls=None):
+    def all(self, cls=None):
         """Retrieve all objects or objects of a specific class.
 
         Args:
