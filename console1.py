@@ -30,6 +30,11 @@ class HBNBCommand(cmd.Cmd):
              'latitude': float, 'longitude': float
             }
 
+    def preloop(self):
+        """Prints if isatty is false"""
+        if not sys.__stdin__.isatty():
+            print('(hbnb)')
+
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
 
@@ -83,6 +88,8 @@ class HBNBCommand(cmd.Cmd):
 
     def postcmd(self, stop, line):
         """Prints if isatty is false"""
+        if not sys.__stdin__.isatty():
+            print('(hbnb) ', end='')
         return stop
 
     def do_quit(self, command):
@@ -341,6 +348,3 @@ class HBNBCommand(cmd.Cmd):
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
 
-
-
-                        
