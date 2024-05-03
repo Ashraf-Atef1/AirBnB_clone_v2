@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-# Fabric script that generates a .tgz archive
+""" Fabric script that generates a .tgz archive """
 import time
 from fabric.api import local
 from os.path import isdir
 
 
 def do_pack():
-    # A function that generates a .tgz archive
+    """ A function that generates a .tgz archive """
     try:
         file_name = f"versions/web_static_{time.strftime("%Y%m%d%H%M%S")}.tgz"
         if isdir("versions") is False:
