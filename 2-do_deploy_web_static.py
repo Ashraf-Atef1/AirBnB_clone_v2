@@ -3,8 +3,8 @@
 that distributes an archive to your web servers """
 
 
-from fabric.api import run, put
-from os.path import exists, env
+from fabric.api import run, put, env
+from os.path import exists
 env.hosts = ['100.25.12.124', '54.236.45.187']
 
 
