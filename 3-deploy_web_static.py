@@ -1,67 +1,49 @@
 #!/usr/bin/python3
-"""pack and deploy content to server
-"""
-from fabric.api import local, env, run, put
-from datetime import datetime
-import os
-env.hosts = ['54.160.86.192', '54.160.113.163']
-env.user = 'ubuntu'
+""" Fabric script (based on the file 1-pack_web_static.py)
+that distributes an archive to your web servers """
+
+import time
+from fabric.api import run, put, env, local
+from os.path import exists, isdir
 
 
 def do_pack():
-    """pack all content within web_static
-    into a .tgz archive
-    The archive will be put in versions/
-    """
-    if not os.path.exists("versions"):
-        local("mkdir versions")
-    now = datetime.now()
-    name = "versions/web_static_{}.tgz".format(
-        now.strftime("%Y%m%d%H%M%S")
-    )
-    cmd = "tar -cvzf {} {}".format(name, "web_static")
-    result = local(cmd)
-    if not result.failed:
-        return name
+    """ A function that generates a .tgz archive """
+    try:
+        file_name = "versions/web_static_{}.tgz".format(
+            time.strftime("%Y%m%d%H%M%S"))
+        if isdir("versions") is False:
+            local("mkdir versions")
+        local("tar -cvzf {} web_static".format(file_name))
+        return file_name
+    except Exception:
+        return None
 
 
 def do_deploy(archive_path):
-    """deploy package to remote server
-    Arguments:
-        archive_path: path to archive to deploy
-    """
-    if not archive_path or not os.path.exists(archive_path):
-        return False
-    put(archive_path, '/tmp')
-    ar_name = archive_path[archive_path.find("/") + 1: -4]
+    """ A function that distributes an archive to your web servers """
     try:
-        run('mkdir -p /data/web_static/releases/{}/'.format(ar_name))
-        run('tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/'.format(
-                ar_name, ar_name
-        ))
-        run('rm /tmp/{}.tgz'.format(ar_name))
-        run('mv /data/web_static/releases/{}/web_static/* \
-            /data/web_static/releases/{}/'.format(
-                ar_name, ar_name
-        ))
-        run('rm -rf /data/web_static/releases/{}/web_static'.format(
-            ar_name
-        ))
-        run('rm -rf /data/web_static/current')
-        run('ln -s /data/web_static/releases/{}/ \
-            /data/web_static/current'.format(
-            ar_name
-        ))
-        print("New version deployed!")
-        return True
-    except:
+        if exists(archive_path):
+            file_name = archive_path.split("/")[-1]
+            file_no_ext = file_name.split(".")[0]
+            path = "/data/web_static/releases/"
+            put(archive_path, '/tmp/')
+            run('mkdir -p {}{}/'.format(path, file_no_ext))
+            run('tar -xzf /tmp/{} -C {}{}/'.format(file_name,
+                                                   path, file_no_ext))
+            run('rm /tmp/{}'.format(file_name))
+            run('mv {0}{1}/web_static/* {0}{1}/'.format(path, file_no_ext))
+            run('rm -rf {}{}/web_static'.format(path, file_no_ext))
+            run('rm -rf /data/web_static/current')
+            run('ln -s {}{}/ /data/web_static/current'.format(
+                path, file_no_ext))
+            return True
+        else:
+            return False
+    except Exception:
         return False
 
 
 def deploy():
-    """pack web_static content and deploy it to web servers
-    """
-    pack = do_pack()
-    if pack:
-        return do_deploy(pack)
-    return False
+    """ A function that distributes an archive to your web servers """
+    return do_deploy(do_pack())
