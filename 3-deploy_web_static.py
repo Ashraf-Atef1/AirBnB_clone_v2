@@ -3,7 +3,7 @@
 that distributes an archive to your web servers """
 
 import time
-from fabric.api import local, put, env
+from fabric.api import local, put, env, run
 from os.path import exists, isdir
 env.hosts = ['54.160.86.192', '54.160.113.163']
 
@@ -20,9 +20,32 @@ def do_pack():
     except Exception:
         return None
 
-
 def do_deploy(archive_path):
     """ A function that distributes an archive to your web servers """
+    try:
+        if exists(archive_path):
+            file_name = archive_path.split("/")[-1]
+            file_no_ext = file_name.split(".")[0]
+            path = "/data/web_static/releases/"
+            put(archive_path, "/tmp/")
+            run('mkdir -p {}{}/'.format(path, file_no_ext))
+            run('tar -xzf /tmp/{} -C {}{}/'.format(
+                file_name, path, file_no_ext))
+            run('rm /tmp/{}'.format(file_name))
+            run('mv {0}{1}/web_static/* {0}{1}/'.format(
+                path, file_no_ext))
+            run('rm -rf {}{}/web_static'.format(path, file_no_ext))
+            run('rm -rf /data/web_static/current')
+            run('ln -fs {}{}/ /data/web_static/current'.format(
+                path, file_no_ext))
+            return True
+        else:
+            return False
+    except Exception:
+        return False
+
+def do_deploy_local(archive_path):
+    """ A function that distributes an archive to your local machine """
     try:
         if exists(archive_path):
             file_name = archive_path.split("/")[-1]
@@ -48,4 +71,7 @@ def do_deploy(archive_path):
 
 def deploy():
     """ A function that distributes an archive to your web servers """
-    return do_deploy(do_pack())
+    if env.hosts == ['54.160.86.192', '54.160.113.163']:
+        return do_deploy(do_pack())
+    else:
+        return do_deploy_local(do_pack())
