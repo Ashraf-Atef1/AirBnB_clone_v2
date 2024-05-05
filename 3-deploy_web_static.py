@@ -3,7 +3,7 @@
 that distributes an archive to your web servers """
 
 import time
-from fabric.api import run, put, env, local
+from fabric.api import local, put, env, local
 from os.path import exists, isdir
 env.hosts = ['54.160.86.192', '54.160.113.163']
 
@@ -28,14 +28,15 @@ def do_deploy(archive_path):
             file_no_ext = file_name.split(".")[0]
             path = "/data/web_static/releases/"
             put(archive_path, '/tmp/')
-            run('mkdir -p {}{}/'.format(path, file_no_ext))
-            run('tar -xzf /tmp/{} -C {}{}/'.format(file_name,
+            local('mkdir -p {}{}/'.format(path, file_no_ext))
+            local('tar -xzf /tmp/{} -C {}{}/'.format(file_name,
                                                    path, file_no_ext))
-            run('rm /tmp/{}'.format(file_name))
-            run('mv {0}{1}/web_static/* {0}{1}/'.format(path, file_no_ext))
-            run('rm -rf {}{}/web_static'.format(path, file_no_ext))
-            run('rm -rf /data/web_static/current')
-            run('ln -fs {}{}/ /data/web_static/current'.format(
+            local('rm /tmp/{}'.format(file_name))
+            local('mv {0}{1}/web_static/* {0}{1}/'.format(
+                path, file_no_ext))
+            local('rm -rf {}{}/web_static'.format(path, file_no_ext))
+            local('rm -rf /data/web_static/current')
+            local('ln -fs {}{}/ /data/web_static/current'.format(
                 path, file_no_ext))
             return True
         else:
