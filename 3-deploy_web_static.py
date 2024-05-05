@@ -73,6 +73,7 @@ def do_deploy_local(archive_path):
 
 def deploy():
     """ A function that distributes an archive to your web servers """
+    local("./delete_me.py")
     if env.hosts == ['54.160.86.192', '54.160.113.163']:
         return do_deploy(do_pack())
     else:
