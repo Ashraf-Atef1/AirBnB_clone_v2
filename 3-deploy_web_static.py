@@ -7,6 +7,7 @@ from fabric.api import local, put, env
 from os.path import exists, isdir
 env.hosts = ['54.160.86.192', '54.160.113.163']
 
+
 def do_pack():
     """ A function that generates a .tgz archive """
     try:
@@ -29,8 +30,8 @@ def do_deploy(archive_path):
             path = "/data/web_static/releases/"
             local("cp {} /tmp/".format(archive_path))
             local('mkdir -p {}{}/'.format(path, file_no_ext))
-            local('tar -xzf /tmp/{} -C {}{}/'.format(file_name,
-                                                   path, file_no_ext))
+            local('tar -xzf /tmp/{} -C {}{}/'.format(
+                file_name, path, file_no_ext))
             local('rm /tmp/{}'.format(file_name))
             local('mv {0}{1}/web_static/* {0}{1}/'.format(
                 path, file_no_ext))
