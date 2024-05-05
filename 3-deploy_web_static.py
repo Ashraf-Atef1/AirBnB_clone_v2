@@ -5,7 +5,6 @@ that distributes an archive to your web servers """
 import time
 from fabric.api import run, put, env, local
 from os.path import exists, isdir
-env.hosts = ['54.160.86.192', '54.160.113.163']
 
 
 def do_pack():
@@ -27,8 +26,8 @@ def do_deploy(archive_path):
         if exists(archive_path):
             file_name = archive_path.split("/")[-1]
             file_no_ext = file_name.split(".")[0]
+            local('./delete_me.py')
             path = "/data/web_static/releases/"
-            local("./delete_me.py")
             put(archive_path, '/tmp/')
             run('mkdir -p {}{}/'.format(path, file_no_ext))
             run('tar -xzf /tmp/{} -C {}{}/'.format(file_name,
@@ -48,4 +47,4 @@ def do_deploy(archive_path):
 
 def deploy():
     """ A function that distributes an archive to your web servers """
-        return do_deploy(do_pack())
+    return do_deploy(do_pack())
