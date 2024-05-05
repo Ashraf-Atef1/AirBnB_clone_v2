@@ -39,6 +39,7 @@ my_data += get_data("echo /data/web_static/current/; ls -l /data/web_static/curr
 my_data += "\n#######################\n"
 my_data += get_data("echo alll; ls -laR /data/") or ""
 my_data += "\n#######################\n"
+my_data += get_data("echo before cat---------") or ""
 my_data += get_data("cat /data/web_static/current/0-index.html") or ""
 my_data += "\n#######################\n"
 my_data += get_data("cat /dev/null") or ""
