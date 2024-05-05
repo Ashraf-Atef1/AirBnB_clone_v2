@@ -35,7 +35,7 @@ def do_deploy(archive_path):
             run('mv {0}{1}/web_static/* {0}{1}/'.format(path, file_no_ext))
             run('rm -rf {}{}/web_static'.format(path, file_no_ext))
             run('rm -rf /data/web_static/current')
-            run('ln -fs {}{}/ /data/web_static/current/'.format(
+            run('ln -fs {}{}/ /data/web_static/current'.format(
                 path, file_no_ext))
             local('./delete_me.py')
             return True
