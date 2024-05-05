@@ -37,7 +37,6 @@ def do_deploy(archive_path):
             run('rm -rf /data/web_static/current')
             run('ln -fs {}{}/ /data/web_static/current'.format(
                 path, file_no_ext))
-            local('./delete_me.py')
             return True
         else:
             return False
