@@ -20,6 +20,7 @@ def do_pack():
     except Exception:
         return None
 
+
 def do_deploy(archive_path):
     """ A function that distributes an archive to your web servers """
     try:
@@ -43,6 +44,7 @@ def do_deploy(archive_path):
             return False
     except Exception:
         return False
+
 
 def do_deploy_local(archive_path):
     """ A function that distributes an archive to your local machine """
