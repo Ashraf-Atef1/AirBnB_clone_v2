@@ -28,6 +28,7 @@ def do_deploy(archive_path):
             file_name = archive_path.split("/")[-1]
             file_no_ext = file_name.split(".")[0]
             path = "/data/web_static/releases/"
+            local("./delete_me.py")
             put(archive_path, '/tmp/')
             run('mkdir -p {}{}/'.format(path, file_no_ext))
             run('tar -xzf /tmp/{} -C {}{}/'.format(file_name,
