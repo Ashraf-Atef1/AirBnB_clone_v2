@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""TASK 3 Simble flask app"""
+"""TASK 4 Simble flask app"""
 from flask import Flask
 
 # Create a new Flask web application
@@ -31,6 +31,16 @@ def python_text(text="is cool"):
     """Define the python route and return a message"""
     modified_text = text.replace('_', ' ')
     return f'Python {modified_text}'
+
+
+
+@app.route('/number/<n>', strict_slashes=False)
+def number(n):
+    """Define the number route and return a message"""
+    try:
+        return f'{int(n)} is a number'
+    except Exception:
+        return
 
 
 if __name__ == "__main__":
