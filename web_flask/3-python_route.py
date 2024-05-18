@@ -26,7 +26,7 @@ def c_text(text):
 
 
 @app.route('/python/<text>', strict_slashes=False)
-def python_text(text):
+def python_text(text="is cool"):
     """Define the c route and return a message"""
     modified_text = text.replace('_', ' ')
     return f'Python {modified_text}'
