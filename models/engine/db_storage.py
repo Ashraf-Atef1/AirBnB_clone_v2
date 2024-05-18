@@ -44,13 +44,15 @@ class DBStorage:
         Returns:
             dict: A dictionary of queried objects.
         """
+        classes = {"Amenity": Amenity, "City": City,
+                   "Place": Place, "Review": Review,
+                   "State": State, "User": User}
         if cls is None:
-            classes = [State, City, User, Place, Review, Amenity]
             objs = []
             for cls in classes:
-                objs.extend(self.__session.query(cls).all())
+                objs.extend(self.__session.query(classes[cls]).all())
         else:
-            objs = self.__session.query(cls).all()
+            objs = self.__session.query(classes[cls]).all()
         return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
