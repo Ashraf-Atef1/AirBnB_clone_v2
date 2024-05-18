@@ -33,7 +33,6 @@ def python_text(text="is cool"):
     return f'Python {modified_text}'
 
 
-
 @app.route('/number/<n>', strict_slashes=False)
 def number(n):
     """Define the number route and return a message"""
