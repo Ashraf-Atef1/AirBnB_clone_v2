@@ -17,7 +17,6 @@ def shutdown_session(exception=None):
 def states_list():
     """list states sorted by name"""
     states = list(storage.all("State").values())
-    return "hello2"
     states.sort(key=lambda x: x.name)
     return render_template('7-states_list.html', states=states)
 
