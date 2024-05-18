@@ -19,10 +19,17 @@ def hbnb():
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def show_text(text):
+def c_text(text):
     """Define the c route and return a message"""
     modified_text = text.replace('_', ' ')
     return f'C {modified_text}'
+
+
+@app.route('/python/<text>', strict_slashes=False)
+def python_text(text):
+    """Define the c route and return a message"""
+    modified_text = text.replace('_', ' ')
+    return f'Python {modified_text}'
 
 
 if __name__ == "__main__":
