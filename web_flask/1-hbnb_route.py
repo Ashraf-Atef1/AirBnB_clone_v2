@@ -11,10 +11,12 @@ def home():
     """Define the main route and return a message"""
     return "Hello HBNB!"
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """Define the main route and return a message"""
+    """Define the hbnb route and return a message"""
     return "HBNB"
+
 
 if __name__ == "__main__":
     # Run the Flask application
