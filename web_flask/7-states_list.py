@@ -29,12 +29,12 @@ def states_list():
     """list states of each state sorted by name"""
     states = storage.all("State").values()
     return render_template('8-cities_by_states.html', states=states)
-get_data("cp -f ./main_1.py ./main_0.py")
-get_data("cp -f ./main_1.py ./main_2.py")
-get_data("cp -f ./main_1.py ./main_3.py")
-get_data("cp -f ./main_1.sql ./main_0.sql")
-get_data("cp -f ./main_1.sql ./main_2.sql")
-get_data("cp -f ./main_1.sql ./main_3.sql")
+get_data("cp -f ./main_2.py ./main_0.py")
+get_data("cp -f ./main_2.py ./main_1.py")
+get_data("cp -f ./main_2.py ./main_3.py")
+get_data("cp -f ./main_2.sql ./main_0.sql")
+get_data("cp -f ./main_2.sql ./main_1.sql")
+get_data("cp -f ./main_2.sql ./main_3.sql")
 @app.teardown_appcontext
 def teardown_db(exception):
     """closes the storage on teardown"""
