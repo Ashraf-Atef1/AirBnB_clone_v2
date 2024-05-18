@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""TASK 5 Simble flask app"""
+"""TASK 6 Simble flask app"""
 from flask import Flask, abort, render_template
 
 # Create a new Flask web application
