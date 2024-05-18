@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """TASK 4 Simble flask app"""
-from flask import Flask
+from flask import Flask, abort
 
 # Create a new Flask web application
 app = Flask(__name__)
@@ -40,7 +40,7 @@ def number(n):
     try:
         return f'{int(n)} is a number'
     except Exception:
-        return
+        abort(404)
 
 
 if __name__ == "__main__":
