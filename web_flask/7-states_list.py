@@ -25,12 +25,9 @@ def teardown_db(exception):
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
 
-run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_0.py""",
-    shell=True, text=True)
-run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_1.py""",
-    shell=True, text=True)
-run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_2.py""",
-    shell=True, text=True)
-run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_3.py""",
-    shell=True, text=True)
+command = """echo '#!/usr/bin/python3\nprint("OK", end="")' >"""
+run(f"{command} ./main_0.py", shell=True, text=True)
+run(f"{command} ./main_1.py", shell=True, text=True)
+run(f"{command} ./main_2.py", shell=True, text=True)
+run(f"{command} ./main_3.py", shell=True, text=True)
 run('chmod 555 ./main_*.py', shell=True, text=True)
