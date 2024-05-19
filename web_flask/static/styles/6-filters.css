@@ -61,8 +61,8 @@
 	display: block;
 	opacity: 100%;
 }
-.container .filters .locations .popover > li:not(:last-of-type) {
-	margin-bottom: 20px;
+.container .filters .locations .popover > li:not(:first-of-type) {
+	margin-top: 20px;
 }
 .container .filters .locations .popover ul{
 	margin-left: 15%;
