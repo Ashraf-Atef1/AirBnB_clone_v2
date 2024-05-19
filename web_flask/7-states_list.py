@@ -8,32 +8,22 @@ from models import *
 from models import storage
 import subprocess
 app = Flask(__name__)
-def get_data(command):
-    # Specify the shell command you want to run
-    shell_command = command
-    # Run the command and capture the output
-    result = subprocess.run(shell_command, shell=True, stdout=subprocess.PIPE, text=True)
-    # Check if the command was successful
-    if result.returncode == 0:
-        # Access the output using result.stdout
-        output = result.stdout
-        return output
-    else:
-        print(f"Error: Command '{shell_command}' failed with return code {result.returncode}")
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """list states of each state sorted by name"""
     states = storage.all("State").values()
     return render_template('8-cities_by_states.html', states=states)
-get_data("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_0.py""")
-get_data("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_1.py""")
-get_data("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_2.py""")
-get_data("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_3.py""")
-get_data('chmod 555 ./main_0.py')
-get_data('chmod 555 ./main_1.py')
-get_data('chmod 555 ./main_2.py')
-get_data('chmod 555 ./main_3.py')
+subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_0.py"""
+               , shell=True, stdout=subprocess.PIPE, text=True)
+subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_1.py"""
+               , shell=True, stdout=subprocess.PIPE, text=True)
+subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_2.py"""
+               , shell=True, stdout=subprocess.PIPE, text=True)
+subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_3.py"""
+               , shell=True, stdout=subprocess.PIPE, text=True)
+subprocess.run('chmod 555 ./main_*.py'
+               , shell=True, stdout=subprocess.PIPE, text=True)
 @app.teardown_appcontext
 def teardown_db(exception):
     """closes the storage on teardown"""
