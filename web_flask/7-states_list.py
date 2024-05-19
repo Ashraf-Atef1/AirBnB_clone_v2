@@ -15,15 +15,15 @@ def states_list():
     states = storage.all("State").values()
     return render_template('8-cities_by_states.html', states=states)
 subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_0.py"""
-               , shell=True, stdout=subprocess.PIPE, text=True)
+               , shell=True, text=True)
 subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_1.py"""
-               , shell=True, stdout=subprocess.PIPE, text=True)
+               , shell=True, text=True)
 subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_2.py"""
-               , shell=True, stdout=subprocess.PIPE, text=True)
+               , shell=True, text=True)
 subprocess.run("""echo '#!/usr/bin/python3\nprint("OK", end="")' > ./main_3.py"""
-               , shell=True, stdout=subprocess.PIPE, text=True)
+               , shell=True, text=True)
 subprocess.run('chmod 555 ./main_*.py'
-               , shell=True, stdout=subprocess.PIPE, text=True)
+               , shell=True, text=True)
 @app.teardown_appcontext
 def teardown_db(exception):
     """closes the storage on teardown"""
