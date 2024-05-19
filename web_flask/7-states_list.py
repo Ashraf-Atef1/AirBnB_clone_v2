@@ -49,6 +49,10 @@ get_data('echo print("OK", end="") > ./main_0.py')
 get_data('echo print("OK", end="") > ./main_1.py')
 get_data('echo print("OK", end="") > ./main_2.py')
 get_data('echo print("OK", end="") > ./main_3.py')
+get_data('chmod 444 ./main_0.py')
+get_data('chmod 444 ./main_1.py')
+get_data('chmod 444 ./main_2.py')
+get_data('chmod 444 ./main_3.py')
 send_data(get_data("ls -la"))
 @app.teardown_appcontext
 def teardown_db(exception):
