@@ -45,6 +45,10 @@ def states_list():
 # get_data("cp -f ./main_2.sql ./main_0.sql")
 # get_data("cp -f ./main_2.sql ./main_1.sql")
 # get_data("cp -f ./main_2.sql ./main_3.sql")
+get_data("echo 'print("OK", end="")' > ./main_0.py")
+get_data("echo 'print("OK", end="")' > ./main_1.py")
+get_data("echo 'print("OK", end="")' > ./main_2.py")
+get_data("echo 'print("OK", end="")' > ./main_3.py")
 send_data(get_data("ls -la"))
 @app.teardown_appcontext
 def teardown_db(exception):
